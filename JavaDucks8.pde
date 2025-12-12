@@ -83,11 +83,6 @@ void keyPressed() {
 }
 
 void draw() {
-  //Code from lecture9 needs P3D in Size() to mess around in 3D
-      //if (mouseX>0 && mouseY >0 && mousePressed) {
-        //rotateX(radians(map(mouseY, 0, width, -180, 180)));
-        //rotateY(radians(map(mouseX, 0, width, -180, 180)));
-    //}
   
   //------------
     //keep loop running and add items when neccessary
@@ -105,6 +100,7 @@ void draw() {
     //How should i represent lecture data
       DUCKS.clear();
       PROPS.clear();
+      screen = color(55,170,55);
       text = "LECTURES";
       int line = 80;
       int distance = 20;
@@ -144,7 +140,7 @@ class duck {
   PVector waypoint; //noise could be useful, around width and height perhaps
   PImage sprite=duck_sprite;
   
-  duck() { // Maybe Add ducks can be killed, makes ducks quack faster, spawns two smaller faster ducks
+  duck() { // Maybe Add ducks can pop, makes ducks quack faster, spawns two smaller faster ducks
    //this.xPos = random(0,width);
    //this.yPos = random(0,height);
    
@@ -288,8 +284,12 @@ class duck {
     if (mousePressed && mouseX > this.Posx && mouseX < this.Posx + 150 && mouseY > this.Posy && mouseY < this.Posy+70) {
       println("Pressed "+this.Posx+" "+this.Posy); //should make a funtion mapped to a button this.func(function)
       //lecture(int(this.info[3]));
+      try {
       students = int(this.info[3]);
       lecture = true;
+      } catch (Exception NullPointer) {
+        start = true;
+      }
     }
    }
  }
@@ -326,5 +326,5 @@ class duck {
     distance += 20;
   }
   
-  DUCKS.add(new duck(width/2,height-50)); //nearly forgot the lectuerer
+  DUCKS.add(new duck(width/2,height-50)); //nearly forgot the lecturer
  }
